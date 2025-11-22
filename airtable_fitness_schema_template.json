@@ -1,0 +1,386 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Airtable Fitness Base",
+    "version": "1.0.0",
+    "description": "Read meal/workout plans and log daily records in Airtable."
+  },
+  "servers": [
+    {
+      "url": "https://api.airtable.com/v0/YOUR_BASE_ID"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "airtable_token": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "Use value: Bearer YOUR_AIRTABLE_PERSONAL_ACCESS_TOKEN"
+      }
+    },
+    "schemas": {
+      "MealPlanRecord": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "object",
+            "properties": {
+              "Week": {
+                "type": "integer"
+              },
+              "DayOfWeek": {
+                "type": "string"
+              },
+              "Meal": {
+                "type": "string"
+              },
+              "Recipe": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "WorkoutPlanRecord": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "object",
+            "properties": {
+              "Week": {
+                "type": "integer"
+              },
+              "DayOfWeek": {
+                "type": "string"
+              },
+              "WorkoutCode": {
+                "type": "string"
+              },
+              "ProgressionPhase": {
+                "type": "string"
+              },
+              "Notes": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "WorkoutDifficultyRecord": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "fields": {
+            "type": "object",
+            "properties": {
+              "WorkoutCode": {
+                "type": "string"
+              },
+              "ProgressionPhase": {
+                "type": "string"
+              },
+              "WorkoutName": {
+                "type": "string"
+              },
+              "ProgressionMultiplier": {
+                "type": "string"
+              },
+              "ProgressionNotes": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "RecordCreate": {
+        "type": "object",
+        "properties": {
+          "fields": {
+            "type": "object",
+            "properties": {
+              "Date": {
+                "type": "string",
+                "format": "date"
+              },
+              "Week": {
+                "type": "integer"
+              },
+              "DayOfWeek": {
+                "type": "string"
+              },
+              "PlanWorkoutCode": {
+                "type": "string"
+              },
+              "CompletedWorkout": {
+                "type": "boolean"
+              },
+              "CompletedBreakfast": {
+                "type": "boolean"
+              },
+              "CompletedLunch": {
+                "type": "boolean"
+              },
+              "CompletedDinner": {
+                "type": "boolean"
+              },
+              "UnderCalorieGoal": {
+                "type": "boolean"
+              },
+              "HitProteinTarget": {
+                "type": "boolean"
+              },
+              "NoUnplannedSnacks": {
+                "type": "boolean"
+              },
+              "Calories": {
+                "type": "number"
+              },
+              "Protein_g": {
+                "type": "number"
+              },
+              "Water_oz": {
+                "type": "number"
+              },
+              "MilesWalked": {
+                "type": "number"
+              },
+              "JumpRope_Min": {
+                "type": "number"
+              },
+              "SleepHours": {
+                "type": "number"
+              },
+              "Stress_1_5": {
+                "type": "number"
+              },
+              "Energy_1_5": {
+                "type": "number"
+              },
+              "Mood_1_5": {
+                "type": "number"
+              },
+              "Weight_lbs": {
+                "type": "number"
+              },
+              "Notes": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "Date"
+            ]
+          }
+        }
+      },
+      "WorkoutDifficultyUpdate": {
+        "type": "object",
+        "properties": {
+          "fields": {
+            "type": "object",
+            "properties": {
+              "ProgressionMultiplier": {
+                "type": "string"
+              },
+              "ProgressionNotes": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "security": [
+    {
+      "airtable_token": []
+    }
+  ],
+  "paths": {
+    "/MealPlan": {
+      "get": {
+        "operationId": "listMealPlan",
+        "summary": "List meal plan rows with optional filter",
+        "parameters": [
+          {
+            "name": "filterByFormula",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Airtable filter formula, e.g. {Week}=1 AND {DayOfWeek}='Monday'"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Meal plan records",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "records": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/MealPlanRecord"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WorkoutPlan": {
+      "get": {
+        "operationId": "listWorkoutPlan",
+        "summary": "List workout plan rows with optional filter",
+        "parameters": [
+          {
+            "name": "filterByFormula",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by Week/DayOfWeek, e.g. {Week}=1 AND {DayOfWeek}='Monday'"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workout plan records",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "records": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/WorkoutPlanRecord"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WorkoutDifficulty": {
+      "get": {
+        "operationId": "listWorkoutDifficulty",
+        "summary": "List workout difficulty definitions",
+        "parameters": [
+          {
+            "name": "filterByFormula",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Filter by WorkoutCode and/or ProgressionPhase, e.g. {WorkoutCode}='StrengthA' AND {ProgressionPhase}='Phase2_Volume'"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workout difficulty records",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "records": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/WorkoutDifficultyRecord"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/WorkoutDifficulty/{recordId}": {
+      "patch": {
+        "operationId": "updateWorkoutDifficulty",
+        "summary": "Update a workout difficulty entry",
+        "parameters": [
+          {
+            "name": "recordId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkoutDifficultyUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated record",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkoutDifficultyRecord"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Record": {
+      "post": {
+        "operationId": "createRecord",
+        "summary": "Create a new daily record entry",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecordCreate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Created record",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecordCreate"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
