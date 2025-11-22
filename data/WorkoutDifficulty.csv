@@ -1,0 +1,43 @@
+WorkoutCode,ProgressionPhase,WorkoutName,ProgressionMultiplier,ProgressionNotes
+StrengthA,Phase1_Base,Strength A – Upper Body,1.0x,Baseline volume and intensity.
+StrengthB,Phase1_Base,Strength B – Lower + Core,1.0x,Baseline volume and intensity.
+StrengthC,Phase1_Base,Strength C – Full Body,1.0x,Baseline volume and intensity.
+Cond1,Phase1_Base,Conditioning 1 – Rope + Walk,1.0x,Baseline volume and intensity.
+Cond2,Phase1_Base,Conditioning 2 – Rope HIIT,1.0x,Baseline volume and intensity.
+Yoga_Light,Phase1_Base,Yoga / Light Cardio,1.0x,Baseline volume and intensity.
+Recovery,Phase1_Base,Recovery Day,1.0x,Baseline volume and intensity.
+StrengthA,Phase2_Volume,Strength A – Upper Body,1.15x,Add an extra set to main lifts where appropriate.
+StrengthB,Phase2_Volume,Strength B – Lower + Core,1.15x,Add an extra set to main lifts where appropriate.
+StrengthC,Phase2_Volume,Strength C – Full Body,1.15x,Add an extra set to main lifts where appropriate.
+Cond1,Phase2_Volume,Conditioning 1 – Rope + Walk,1.25x,Increase conditioning duration or rounds slightly.
+Cond2,Phase2_Volume,Conditioning 2 – Rope HIIT,1.25x,Increase conditioning duration or rounds slightly.
+Yoga_Light,Phase2_Volume,Yoga / Light Cardio,1.0x,Optional slightly longer sessions for recovery.
+Recovery,Phase2_Volume,Recovery Day,1.0x,Standard easy walk and light mobility.
+StrengthA,Phase3_Supersets,Strength A – Upper Body,1.3x,Introduce supersets to increase training density.
+StrengthB,Phase3_Supersets,Strength B – Lower + Core,1.3x,Introduce supersets to increase training density.
+StrengthC,Phase3_Supersets,Strength C – Full Body,1.3x,Introduce supersets to increase training density.
+Cond1,Phase3_Supersets,Conditioning 1 – Rope + Walk,1.4x,Conditioning focus with longer or denser intervals.
+Cond2,Phase3_Supersets,Conditioning 2 – Rope HIIT,1.4x,Conditioning focus with longer or denser intervals.
+Yoga_Light,Phase3_Supersets,Yoga / Light Cardio,1.0x,Use yoga to support recovery from higher density training.
+Recovery,Phase3_Supersets,Recovery Day,1.0x,Keep recovery days relaxed and low intensity.
+StrengthA,Phase4_Load,Strength A – Upper Body,1.35x,Increase load or reps by about 5–10% over baseline.
+StrengthB,Phase4_Load,Strength B – Lower + Core,1.35x,Increase load or reps by about 5–10% over baseline.
+StrengthC,Phase4_Load,Strength C – Full Body,1.35x,Increase load or reps by about 5–10% over baseline.
+Cond1,Phase4_Load,Conditioning 1 – Rope + Walk,1.5x,Increase intensity or reduce rest slightly.
+Cond2,Phase4_Load,Conditioning 2 – Rope HIIT,1.5x,Increase intensity or reduce rest slightly.
+Yoga_Light,Phase4_Load,Yoga / Light Cardio,1.0x,"Maintain light, restorative work."
+Recovery,Phase4_Load,Recovery Day,1.0x,Maintain easy recovery pace.
+StrengthA,Phase5_CondPlus,Strength A – Upper Body,1.35x,Maintain strength while conditioning volume increases.
+StrengthB,Phase5_CondPlus,Strength B – Lower + Core,1.35x,Maintain strength while conditioning volume increases.
+StrengthC,Phase5_CondPlus,Strength C – Full Body,1.35x,Maintain strength while conditioning volume increases.
+Cond1,Phase5_CondPlus,Conditioning 1 – Rope + Walk,1.6x,Higher conditioning volume; monitor fatigue.
+Cond2,Phase5_CondPlus,Conditioning 2 – Rope HIIT,1.6x,Higher conditioning volume; monitor fatigue.
+Yoga_Light,Phase5_CondPlus,Yoga / Light Cardio,1.1x,Use yoga 1–2x weekly to aid recovery.
+Recovery,Phase5_CondPlus,Recovery Day,1.0x,Emphasize full recovery on off days.
+StrengthA,Phase6_Peak,Strength A – Upper Body,1.4x,Peak block; maintain best solid loads without grinding.
+StrengthB,Phase6_Peak,Strength B – Lower + Core,1.4x,Peak block; maintain best solid loads without grinding.
+StrengthC,Phase6_Peak,Strength C – Full Body,1.4x,Peak block; maintain best solid loads without grinding.
+Cond1,Phase6_Peak,Conditioning 1 – Rope + Walk,1.75x,Peak conditioning; keep form and recovery in mind.
+Cond2,Phase6_Peak,Conditioning 2 – Rope HIIT,1.75x,Peak conditioning; keep form and recovery in mind.
+Yoga_Light,Phase6_Peak,Yoga / Light Cardio,1.1x,Use yoga strategically between harder days.
+Recovery,Phase6_Peak,Recovery Day,1.0x,Protect recovery to consolidate peak performance.

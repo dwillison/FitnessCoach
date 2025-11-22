@@ -114,3 +114,90 @@ The Custom GPT creates records in this table to log what actually happened each 
 - You can adjust progression, add new workout codes, or tweak meals at any time in Airtable.
 
 Enjoy building your automated fitness + nutrition workflow!
+
+
+## Getting Started
+
+Follow these steps to set up your automated Fitness & Nutrition system:
+
+### 1. Import the CSV files into Airtable
+Create a new Airtable base with four tables:
+- **MealPlan**
+- **WorkoutPlan**
+- **WorkoutDifficulty**
+- **Record**
+
+Use the CSV import feature to load each CSV file into its corresponding table.
+
+### 2. Create a Personal Access Token (PAT)
+Go to:
+https://airtable.com/create/tokens
+- Create a new token
+- Grant access to your new base
+- Enable `data.records:read` and `data.records:write`
+
+Copy the token.
+
+### 3. Set up your Custom GPT
+In ChatGPT → **Build a GPT**:
+- Add an **Action**
+- Import the `airtable_fitness_schema_template.json` file
+- Set API authentication to:
+  - Type: API Key
+  - Header name: `Authorization`
+  - Value: `Bearer YOUR_TOKEN`
+
+### 4. Upload your custom GPT instructions and privacy policy
+- Paste the contents of `custom_gpt_config.txt` into the Instructions field
+- Add your privacy policy link
+
+### 5. Start using it
+Ask things like:
+- “What’s today's workout?”
+- “What’s my meal plan today?”
+- “Log that I completed today’s workout and hit my protein target.”
+
+Your GPT will read from Airtable and log data whenever you request.
+
+Enjoy your automated training system!
+
+
+## Architecture Overview
+
+```text
++-------------------------+
+|       Custom GPT        |
+|  (Fitness Assistant)    |
++-----------+-------------+
+            |
+            | Airtable API (via Actions)
+            v
++-------------------------+
+|        Airtable         |
+|-------------------------|
+| MealPlan        (data/) |
+| WorkoutPlan     (data/) |
+| WorkoutDifficulty(data/)|
+| Record          (data/) |
++-------------------------+
+
+Support files in this repo:
+- README.md                      -> Project overview and setup
+- data/MealPlan.csv              -> 4-week rotating meal plan
+- data/WorkoutPlan.csv           -> 24-week workout schedule
+- data/WorkoutDifficulty.csv     -> Workout scaling rules
+- data/RecordTemplate.csv        -> Daily logging template
+- gpt/custom_gpt_config.txt      -> GPT instructions + privacy wording
+- schema/airtable_fitness_schema_template.json -> OpenAPI schema for Actions
+```
+
+## Example Prompts
+
+Once everything is wired up, you can say things like:
+
+- "What is today's workout?"
+- "What is my meal plan for today?"
+- "Log that I completed today's workout and breakfast."
+- "Log that I walked 2 miles, did 15 minutes of jump rope, and stayed under my calorie goal."
+- "StrengthB feels too easy. Increase the difficulty for this phase."
+- "Show me what my workout will be next Monday."
